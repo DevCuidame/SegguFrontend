@@ -1,0 +1,96 @@
+@import '../../../../assets/colores.scss';
+
+.pagina-inicial {
+  height: 100%;
+  background-color: $color-secundario;
+  color: $color-texto;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .text-section {
+    max-width: 40%;
+    margin-left: 10%;
+
+    h2 {
+      color: $color-texto;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: $color-texto-secundario;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .imagenes{
+    background-color: $color-primario;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    top: -150px;
+    right: -150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(243,216,151,255);
+    z-index: 2;
+
+    .circular-image {
+        position: absolute;
+        top: 3rem;
+        left: 2rem;
+        width: 80%;
+        height: 85%;
+        border-radius: 50%;
+        box-shadow: 0 0px 20px 10px rgba(242, 146, 22, 100);
+        object-fit: cover;
+      }
+    }
+}
+
+.cards-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+
+  .card {
+    background-color: $color-terciario;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 300px;
+    border-bottom: 0.75rem solid #d4501b;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    h3 {
+      color: $color-texto-terciario;
+    }
+
+    h4{
+      color: $color-texto-secundario;
+      font-weight: lighter;
+    }
+
+    h3, h4{
+      font-size: 1.5rem;
+      margin: 4px 0;
+    }
+
+    p {
+      color: $color-texto-secundario;
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 5px;
+      max-width: 80%;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+

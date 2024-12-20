@@ -1,0 +1,33 @@
+@import '../../assets/colores.scss';
+
+.main-home{
+    background-color: #ebebe7;
+    height: 100vh;
+    padding: 5.5rem 0;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+
+    .title-seguros{
+        width: 70%;
+        color: $color-texto;
+        margin-top: 7rem;
+        font-size: 3rem;
+        font-weight: 400;
+    }
+
+    .insurance-cards{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 3rem;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none; 
+        }
+    }
+}

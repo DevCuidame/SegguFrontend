@@ -1,0 +1,123 @@
+@import '../../../../assets/colores.scss';
+
+.contacto-module {
+    background-color: $color-bg;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contacto {
+        background-color: $color-terciario;
+        height: 70%;
+        width: 65%;
+        position: relative;
+        padding: 100px 50px;
+        box-shadow: -10px 10px 15px 0px rgba(145,145,145,1);
+
+        .form-contacto {
+            height: 100%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .title {
+
+                h1,
+                p {
+                    color: $color-texto-secundario; 
+                    font-weight: 400;
+                }
+            }
+
+            .input {
+                height: 4rem;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 1.5px solid $color-texto-secundario;
+
+                span,
+                picture {
+                    position: relative;
+                    color: $color-texto-secundario;
+                    z-index: 3;
+                }
+
+                span {
+                    background-color: $color-terciario;
+                    font-size: 1.5rem;
+                    margin-left: 30px;
+                    padding: 0 10px;
+                    z-index: 1;
+                    transition: top 0.3s ease, font-size 0.3s ease;
+                }
+
+                input {
+                    background-color: transparent;
+                    position: absolute;
+                    height: 4rem;
+                    width: 35%;
+                    padding: 0 40px;
+                    border: none;
+                    outline: none;
+                    z-index: 5;
+
+                    &:hover {
+                        $span-psoition: -35px;
+                    }
+                }
+            }
+
+            .btn {
+                background-color: #e5480b;
+                color: white;
+                width: fit-content;
+                border-radius: 0;
+                padding: 10px 30%;
+                margin: 10px 0;
+                box-shadow: 0px 0px 15px 0px rgba(235,235,235,1);
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+        }
+
+        .informacion {
+            background-color: $color-header-secundario;
+            color: white;
+            height: 60%;
+            width: 40%;
+            padding: 30px;
+            padding-right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+            z-index: 5;
+
+            h1{
+                font-weight: 400;
+            }
+
+        }
+
+        .bg{
+            background-color: $color-primario;
+            height: 100%;
+            width: 25%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        }
+    }
+}

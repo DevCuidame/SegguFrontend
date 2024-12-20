@@ -1,0 +1,126 @@
+@import '../../../assets/colores.scss';
+
+.insurance-card {
+    background-color: $color-terciario;
+    width: 70%;
+    padding: 30px;
+    display: flex;
+
+    .img-seguro {
+        flex: 2 1 auto;
+        
+        img {
+            height: 20rem;
+        }
+    }
+
+    .info-container {
+        color: $color-texto;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+
+        .arriba {
+            display: flex;
+            max-width: 50%;
+
+            .nav-container{
+                position: relative;
+
+                h6{
+                    border-radius: 25px;
+                    padding: 5px 15px;
+                    margin-right: 8px;
+                    font-size: small;
+                    color: white;
+
+                    &:hover{
+                        cursor: default;
+                    }
+                }
+
+                .asistencia{
+                    background-color: #e9bd31;
+                    color: black;
+                }
+
+                .popup-info{
+                    background-color: $color-terciario;
+                    color: $color-texto;
+                    height: auto;
+                    width: 15rem;
+                    padding: 15px;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -115%);
+                    text-align: center;
+                    box-shadow: 5px 5px 5px 0px rgb(131, 131, 131);
+                    z-index: 10;
+                }
+            }
+        }
+
+        .medio {
+            display: flex;
+            justify-content: space-between;
+
+            .title{
+                font-size: 2.5rem;
+                font-weight: 400;
+                margin: 15px 0;
+            }
+
+            .btn-container{
+                display: flex;
+                gap: 1rem;
+
+                span{
+                    margin-left: 5px;
+                }
+            }
+
+            .info-seguro{
+                text-align: right;
+                margin-top: 20px;
+
+                li{
+                    list-style-type: none;
+                }
+            }
+        }
+
+        .abajo {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+
+            button {
+                background-color: $color-header-secundario;
+                color: $color-texto-cuarto;
+                font-size: x-large;
+                border: none;
+                padding: 3px 50px;
+                border-radius: 15px;
+
+                &:hover{
+                    box-shadow: 5px 5px 5px 0px rgb(131, 131, 131);
+                }
+            }
+
+            a {
+                color: $color-texto;
+                font-size: larger;
+                padding: 5px 10px;
+                border-radius: 10px;
+                font-weight: 450;
+                text-decoration: none;
+
+                &:hover{
+                    box-shadow: 5px 5px 5px 0px rgb(131, 131, 131);
+                }
+            }
+        }
+    }
+}

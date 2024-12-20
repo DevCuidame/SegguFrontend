@@ -1,0 +1,141 @@
+@import '../../../../assets/colores.scss';
+
+.login{
+    height: 100%;
+    padding-top: 5rem;
+    background-color: $color-secundario;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .container{
+        background-color: $color-terciario;
+        height: 75%;
+        width: 75%;
+        padding: 0;
+        display: flex;
+
+        form{
+            height: 100%;
+            width: 50%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .title, .input {
+                margin: 1rem 0;
+            }
+
+            .title{
+                background-color: #fdbd1b;
+                color: white;
+                position: relative;
+                top: -25px;
+                left: -20%;
+                width: fit-content;
+                padding: 1.5rem 25%;
+                text-align: center;
+            }
+
+            .input{
+                height: 4rem;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 6px solid  $color-texto-cuarto;
+
+                span, picture{
+                    position: relative;
+                    color: $color-texto-cuarto;
+                    z-index: 3;
+                }
+
+                span{
+                    background-color: $color-terciario;
+                    font-size: 1.5rem;
+                    margin-left: 30px;
+                    padding: 0 10px;
+                    z-index: 1;
+                    transition: top 0.3s ease, font-size 0.3s ease;
+                }
+
+                input{
+                    background-color: transparent;
+                    position: absolute;
+                    height: 4rem;
+                    width: 26%;
+                    padding: 0 40px;
+                    border: none;
+                    outline: none;
+                    z-index: 5;
+
+                    &:hover{
+                        $span-psoition: -35px;
+                    }
+                }
+            }
+
+            .buttons{
+                width: 30rem;
+                display: flex;
+                justify-content: baseline;
+                margin-left: 10px;
+                position: relative;
+                bottom: -15%;
+
+                .btn{
+                    box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
+                    width: fit-content;
+                    border-radius: 0;
+                    padding: 15px 50px;
+                    margin: 0 10px;
+
+                    &:hover{
+                        transform: scale(1.1);
+                    }
+                }
+
+                .btn-ingresar{
+                    background-color: #e5480b;
+                    color: white;
+                }
+
+                .btn-registro{
+                    background-color:#eae9e5;
+                }
+            }
+        }
+
+        .img-section{
+            width: 50%;
+            display: flex;
+
+            .img-bg{
+                width: 100%;
+            }
+
+            .bar{
+                position: absolute;
+                height: 80%;
+                width: 1.4rem;
+                top: 15%;
+            }
+
+            .bar1{
+                background-color: #0ba3a6;
+                right: 20%;
+            }
+
+            .bar2{
+                background-color: $color-primario;
+                right: 23%;
+            }
+        }
+    }
+}
+
+.hide{
+    display: none;
+}

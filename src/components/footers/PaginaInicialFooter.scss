@@ -1,0 +1,29 @@
+@import '../../assets/colores.scss';
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 5rem;
+    width: 30%;
+    background-color: $color-primario;
+    text-align: center;
+    padding: 10px 0;
+
+    .social-links {
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        a {
+            text-decoration: none;
+            color: $color-texto;
+
+            &:hover {
+                color: $color-hover;
+            }
+        }
+    }
+}
+  
