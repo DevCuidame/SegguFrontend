@@ -19,14 +19,14 @@ export const login = async (userInput, password) => {
 
     const { token, user } = await response.json();
 
-    // Guardar token, datos del usuario y user_id en localStorage
+    // Guardar token y datos del usuario en almacenamiento local
     localStorage.setItem(TOKEN_KEY, token);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
 
     return user;
   } catch (error) {
     console.error('Error en login:', error.message);
-    throw error;
+    throw new Error('Credenciales inválidas o error de conexión');
   }
 };
 
@@ -34,6 +34,7 @@ export const login = async (userInput, password) => {
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
+  console.log('Sesión cerrada');
 };
 
 // Verificar si el usuario está autenticado
@@ -41,22 +42,23 @@ export const isAuthenticated = () => {
   const token = localStorage.getItem(TOKEN_KEY);
   if (!token) return false;
 
-  // Opción: Verificar expiración del token (dependiendo de su estructura)
   try {
     const [, payload] = token.split('.');
     const decoded = JSON.parse(atob(payload));
-    const isExpired = decoded.exp && Date.now() >= decoded.exp * 1000;
-    return !isExpired;
+    if (decoded.exp && Date.now() >= decoded.exp * 1000) {
+      logout(); // Cierra sesión si el token expiró
+      return false;
+    }
+    return true;
   } catch (error) {
-    console.warn('Error al verificar el token:', error);
+    console.warn('Token inválido:', error);
+    logout(); // Limpia almacenamiento si el token es inválido
     return false;
   }
 };
 
 // Obtener el token actual
-export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY);
-};
+export const getToken = () => localStorage.getItem(TOKEN_KEY);
 
 // Obtener los datos del usuario actual
 export const getCurrentUser = () => {
@@ -67,22 +69,34 @@ export const getCurrentUser = () => {
 // Middleware para solicitudes autenticadas
 export const authFetch = async (url, options = {}) => {
   const token = getToken();
+
+  if (!token) {
+    logout();
+    throw new Error('No hay token disponible, por favor inicia sesión nuevamente');
+  }
+
   const headers = {
     ...(options.headers || {}),
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
   };
 
-  const response = await fetch(url, {
-    ...options,
-    headers,
-  });
+  try {
+    const response = await fetch(url, { ...options, headers });
 
-  // Manejo de errores como token expirado
-  if (response.status === 401) {
-    logout();
-    throw new Error('Sesión expirada, por favor inicia sesión nuevamente');
+    if (response.status === 401) {
+      logout();
+      throw new Error('Sesión expirada, por favor inicia sesión nuevamente');
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error en la solicitud');
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Error en authFetch:', error.message);
+    throw new Error(error.message || 'Error en la comunicación con el servidor');
   }
-
-  return response;
 };

@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../services/AuthUser.service';
 import './HomeHeader.scss';
 
 const HeaderHome = () => {
+  const navigate = useNavigate();
+  
+  const handleLogOut = async () => {
+      await logout(); 
+      navigate('/inicio');
+  };
+  
   
   return (
     <header className="home-header">
@@ -37,13 +45,13 @@ const HeaderHome = () => {
         </summary>
 
         <ul>
-          <li><Link >Ver perfil</Link></li>
-          <li><a href="">Mensajes</a></li>
-          <li><a href="">Mis seguros</a></li>
-          <li><a href="">Recomendados</a></li>
+          <li>Ver perfil</li>
+          <li>Mensaje</li>
+          <li>Mis seguros</li>
+          <li>Recomendados</li>
           <hr />
-          <li><a href="">Ayuda</a></li>
-          <li><a href="">Salir</a></li>
+          <li>Ayuda</li>
+          <li  onClick={handleLogOut}>Salir</li>
         </ul>
       </details>
     </header>
