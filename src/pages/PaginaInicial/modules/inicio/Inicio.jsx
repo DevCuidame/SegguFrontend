@@ -41,7 +41,7 @@ const Inicio = () => {
       </section>
 
       <section className="imagenes">
-        <img src="../../../assets/pagInicial-img-1.jpg" alt="Familia feliz" className="circular-image"/>
+        <img src="../../../assets/img-inicio.png" alt="Familia feliz" className="circular-image"/>
       </section>
     </div>
   );

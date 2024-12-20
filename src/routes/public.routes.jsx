@@ -9,7 +9,7 @@ const PublicRoutes = () => {
     <Routes>
       <Route path="/inicio/*" element={<PaginaInicialLayout />} />
       <Route path="/home/*" element={<PaginaHome />} />
-      <Route path="/profile/*" element={<PaginaPerfil />} />
+      {/* <Route path="/profile/*" element={<PaginaPerfil />} /> */}
     </Routes>
   );
 };

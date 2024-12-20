@@ -7,10 +7,13 @@
     display: flex;
 
     .img-seguro {
-        flex: 2 1 auto;
+        max-width: 40%;
+        margin-right: 50px;
         
         img {
-            height: 20rem;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
         }
     }
 

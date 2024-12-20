@@ -37,7 +37,7 @@ const HeaderHome = () => {
         </summary>
 
         <ul>
-          <li><Link to="/profile">Ver perfil</Link></li>
+          <li><Link >Ver perfil</Link></li>
           <li><a href="">Mensajes</a></li>
           <li><a href="">Mis seguros</a></li>
           <li><a href="">Recomendados</a></li>
