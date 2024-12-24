@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getPerfilInfo } from '../../../services/Perfil.service';
+import { usePerfilService } from '../../../services/Perfil.service';
 import './DataPerfil.scss'
 
 function DataPerfil() {
     const [perfil, setPerfil] = useState([]);
+    const { getPerfilInfo } = usePerfilService();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,7 +17,7 @@ function DataPerfil() {
         };
 
         fetchData();
-    }, []);
+    });
 
     return (
         <article className="data-perfil">

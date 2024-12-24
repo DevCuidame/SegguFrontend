@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../services/AuthUser.service';
+import { useAuthService } from '../../services/AuthUser.service';
 import './HomeHeader.scss';
 
 const HeaderHome = () => {
   const navigate = useNavigate();
+  const { logout } = useAuthService(); 
   
   const handleLogOut = async () => {
       await logout(); 

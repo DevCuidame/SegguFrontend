@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, logout } from '../../../../services/AuthUser.service'; 
+import { useAuthService } from '../../../../services/AuthUser.service'; 
 import './Login.scss';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { loginUser } = useAuthService(); 
   const [userInput, setUserInput] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ const Login = () => {
     setError(null);
 
     try {
-      await login(userInput, password); 
+      await loginUser(userInput, password); 
       navigate('/home');
     } catch (err) {
       setError(err.message);

@@ -29,21 +29,24 @@
 
   .imagenes{
     background-color: $color-primario;
-    width: 80%;
-    height: 100%;
+    width: 45rem;
+    height: 45rem;
+    aspect-ratio: 1 / 1;
     position: relative;
-    top: -150px;
-    right: -150px;
+    top: -100px;
+    right: -130px;
+    transform: scale(1.1);
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(243,216,151,255);
     z-index: 2;
 
     .circular-image {
         position: absolute;
-        top: 3rem;
-        left: 2rem;
-        width: 80%;
-        height: 85%;
+        top: 1rem;
+        left: 1rem;
+        width: 40rem;
+        height: 40rem;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         box-shadow: 0 0px 20px 10px rgba(242, 146, 22, 100);
         object-fit: cover;

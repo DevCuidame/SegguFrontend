@@ -1,39 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import './home.scss';
 import HeaderHome from "../../components/headers/HomeHeader";
 import FooterPaginaInicial from "../../components/footers/PaginaInicialFooter";
 
 import InsuranceCompoent from './components/Insurance';
 import DataPerfil from "../perfil/components/DataPerfil";
-import { isAuthenticated, authFetch } from "../../services/AuthUser.service"; 
+import { useInsuranceService } from '../../services/Insurance.service';
 
 function PaginaHome() {
+  const { getInsurance } = useInsuranceService();
+  const [insurances, setInsurances] = useState([]);
+
   useEffect(() => {
-    // Ejemplo: Verificar si el usuario está autenticado
-    const authenticateUser = async () => {
-      try {
-        const isAuthenticated = await isAuthenticated();
-        if (!isAuthenticated) {
-          window.location.href = '/login'; // Redirigir si no está autenticado
-        }
-      } catch (error) {
-        console.error("Error al verificar la autenticación:", error);
-      }
-    };
+      const fetchInsuranceData = async () => {
+          try {
+              const data = await getInsurance();
+              setInsurances(data);
+          } catch (error) {
+              console.error(error.message);
+          }
+      };
+  
+      fetchInsuranceData();
+  }, []); // Agrega un array de dependencias vacío para que se ejecute solo una vez
 
-    // Ejemplo: Obtener datos del usuario
-    const fetchData = async () => {
-      try {
-        const userData = await authFetch();
-        console.log("Datos del usuario:", userData); // Reemplaza esto por lógica real
-      } catch (error) {
-        console.error("Error al obtener datos del usuario:", error);
-      }
-    };
-
-    authenticateUser();
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -42,8 +32,11 @@ function PaginaHome() {
       <main className="main-home">
         <DataPerfil />
         <article className="insurance-cards">
-          <h6 className="title-seguros">Mis Seguros</h6>
-          <InsuranceCompoent insurance_id="{}" />
+        <h6 className="title-seguros">Mis Seguros</h6>
+
+        {insurances.map((insurance, index)  => {
+          return <InsuranceCompoent key={index} insurance={insurance} />;
+        })}
         </article>
       </main>
 
