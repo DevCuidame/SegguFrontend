@@ -23,8 +23,6 @@ export const AuthProvider = ({ children }) => {
     setUser(user.user);
     setToken(user.token);
 
-    console.log(user,token);
-
     // También los guarda en localStorage para persistencia.
     localStorage.setItem('user', JSON.stringify(user.user));
     localStorage.setItem('token', user.token);
