@@ -22,7 +22,7 @@ function PaginaHome() {
       };
   
       fetchInsuranceData();
-  }, []); // Agrega un array de dependencias vacío para que se ejecute solo una vez
+  }, [ getInsurance ]); // Agrega un array de dependencias vacío para que se ejecute solo una vez
 
 
   return (
