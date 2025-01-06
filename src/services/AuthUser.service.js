@@ -6,6 +6,7 @@ export const useAuthService = () => {
 
   const loginUser = async (userInput, password) => {
     try {
+      console.log(`${API_BASE_URL}/auth`);
       const response = await fetch(`${API_BASE_URL}/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
