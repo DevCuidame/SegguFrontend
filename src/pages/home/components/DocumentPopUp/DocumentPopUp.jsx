@@ -1,14 +1,11 @@
 import React from 'react';
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Document, Page, pdfjs } from 'react-pdf';
 import './DocumentPopUp.scss';
 
-import { Viewer } from '@react-pdf-viewer/core';
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+// Configuración del worker local
+pdfjs.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@4.8.69/build/pdf.mjs';
 
 const DocumentPopUp = ({ documentType, documentSrc, onClose }) => {
-  const defaultLayoutPluginInstance = defaultLayoutPlugin();
-
   return (
     <div className="document-popup-overlay">
       <div className="document-popup">
@@ -17,11 +14,10 @@ const DocumentPopUp = ({ documentType, documentSrc, onClose }) => {
         {documentType === 'image' ? (
           <img src={documentSrc} alt="Document" className="document-image" />
         ) : (
-          <div className="document-pdf">
-            <Viewer
-              fileUrl={documentSrc}
-              plugins={[defaultLayoutPluginInstance]}
-            />
+          <div className="pdf-container">
+            <Document file={documentSrc}>
+              <Page pageNumber={1} />
+            </Document>
           </div>
         )}
       </div>
@@ -30,3 +26,4 @@ const DocumentPopUp = ({ documentType, documentSrc, onClose }) => {
 };
 
 export default DocumentPopUp;
+

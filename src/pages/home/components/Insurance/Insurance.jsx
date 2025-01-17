@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DocumentPopUp from './DocumentPopUp/DocumentPopUp';
+import DocumentPopUp from '../DocumentPopUp/DocumentPopUp';
 import './Insurance.scss';
 
 
@@ -7,7 +7,7 @@ function InsuranceCompoent ({ insurance }) {
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const [document, setDocument] = useState({
         type: 'pdf',
-        src: 'https://www.ugr.es/~agomezb/etsie_eg1/etsie_eg1_material_docente/t2_croquizacion.pdf',
+        src: './example.pdf',
     });
 
 

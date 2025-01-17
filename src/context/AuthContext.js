@@ -10,7 +10,17 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     // Recupera el usuario desde el localStorage al cargar la aplicación.
     const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
+    
+    // Asegúrate de que `storedUser` no es nulo y es una cadena válida JSON.
+    if (storedUser) {
+      try {
+        return JSON.parse(storedUser);
+      } catch (error) {
+        console.error('Error al analizar el usuario desde localStorage:', error);
+        return null; // En caso de error, devuelve `null`.
+      }
+    }
+    return null;
   });
 
   const [token, setToken] = useState(() => {

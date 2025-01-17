@@ -6,7 +6,6 @@ export const useAuthService = () => {
 
   const loginUser = async (userInput, password) => {
     try {
-      console.log(`${API_BASE_URL}/auth`);
       const response = await fetch(`${API_BASE_URL}/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,7 +60,31 @@ export const useAuthService = () => {
     }
   };
 
+  const registerUser = async (userData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al registrar usuario');
+      }
+
+      const { user, token } = await response.json();
+
+      login({ user, token });
+
+      return { user, token };
+    } catch (error) {
+      console.error('Error en registerUser:', error.message);
+      throw new Error('Error al registrar usuario o conexión con el servidor');
+    }
+  };
+
   const getUser = () => user;
 
-  return { loginUser, logout, isAuthenticated, authFetch, getUser };
+  return { loginUser, logout, isAuthenticated, authFetch, getUser, registerUser };
 };

@@ -12,11 +12,33 @@
     overflow-y: scroll;
 
     .title-seguros{
-        width: 70%;
-        color: $color-texto;
-        margin-top: 7rem;
-        font-size: 3rem;
-        font-weight: 400;
+        width: 65%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 6rem;
+
+        .title{
+            width: 70%;
+            color: $color-texto;
+            font-size: 3rem;
+            font-weight: 400;
+        }
+
+        .edit{
+            background-color: $color-fondo-perfil;
+            color: white;
+            border: none;
+            height: 50px;
+            width: 200px;
+            border-radius: 10px;
+
+            span{
+                margin-left: 10px;
+                font-size: larger;
+            }
+        }
     }
 
     .insurance-cards{

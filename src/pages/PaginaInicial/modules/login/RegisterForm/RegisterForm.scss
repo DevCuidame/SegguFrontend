@@ -1,0 +1,60 @@
+.register-form{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-end;
+    flex-wrap: wrap;
+
+    .segment{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .inputDiv {
+            margin: 1rem 0;
+        }
+
+        .imagen {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            transform: scale(1.5);
+            margin-bottom: 100px;
+        }
+        
+        .buttons{
+            display: flex;
+            margin-left: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            position: absolute;
+            bottom: 50px;
+
+            .btn{
+                box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
+                width: fit-content;
+                border-radius: 0;
+                padding: 15px 50px;
+                margin: 0 10px;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+
+            .btn-siguiente{
+                background-color: #e5480b;
+                color: white;
+            }
+
+            .btn-atras{
+                background-color:#eae9e5;
+            }
+        }
+    }
+}

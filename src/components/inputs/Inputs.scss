@@ -1,0 +1,61 @@
+@import '../../assets/colores.scss';
+
+// Estilos para Inputs tipo texto
+.inputDiv{
+    height: 4rem;
+    width: 80%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 6px solid  $color-texto-cuarto;
+
+    .input-span, picture{
+        position: relative;
+        color: $color-texto-cuarto;
+        z-index: 3;
+    }
+
+    .input-span{
+        background-color: $color-terciario;
+        font-size: 1.5rem;
+        margin-left: 30px;
+        padding: 0 10px;
+        position: absolute;
+        z-index: 1;
+        transition: top 0.3s ease, font-size 0.3s ease;
+    }
+
+    input{
+        background-color: transparent;
+        height: 4rem;
+        width: 100%;
+        margin-left: 30px;
+        position: relative;
+        border: none;
+        outline: none;
+        z-index: 5;
+
+        &:hover{
+            $span-psoition: -35px;
+        }
+    }
+
+    //Input para el tipo de select
+    .input-select{
+        background-color: transparent;
+        height: 4rem;
+        width: 100%;
+        margin-left: 30px;
+        position: relative;
+        border: none;
+        outline: none;   
+        appearance: none;     /* Elimina el estilo predeterminado del navegador */
+        -webkit-appearance: none; /* Para Webkit (Chrome, Safari) */
+        -moz-appearance: none;   /* Para Firefox */
+        z-index: 5; 
+    }
+
+}
+
+// Estilos para Inputs tipo date

@@ -1,0 +1,79 @@
+@import '../../../../assets/colores.scss';
+
+.add-insurance-form {
+    height: 100vh;
+    width: 100%;
+    display: none;
+    backdrop-filter: brightness(0.5);
+    position: absolute;
+    top: -50px;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+
+    hr{
+        width: 80%;
+        border: 1px solid black;
+        margin-top: 0;
+    }
+
+    .insurance-form {
+        background-color: white;
+        width: 50%;
+        height: 75%;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title-insurance-form{
+            margin: 15px 0;
+            margin-left: 10%;
+            align-self: flex-start;
+        }
+
+        .inputs-form{
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+
+            .inputDiv{
+                margin: 15px 0;
+            }
+        }
+
+        .buttons{
+            width: 100%;
+            padding: 15px 0px;
+            display: flex;
+            margin-left: 10px;
+            justify-content: center;
+            z-index: 15;
+
+            .btn{
+                box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
+                width: fit-content;
+                border-radius: 0;
+                padding: 15px 50px;
+                margin: 0 10px;
+                cursor: pointer;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+
+            .btn-siguiente{
+                background-color: #e5480b;
+                color: white;
+            }
+
+            .btn-atras{
+                background-color:#eae9e5;
+            }
+        }
+    }
+}

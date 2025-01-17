@@ -1,0 +1,55 @@
+@import '../../../../../assets/colores.scss';
+
+.loginForm{
+    height: 100%;
+    width: 50%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 1s ease;
+
+    .title, .inputDiv {
+        margin: 1rem 0;
+    }
+
+    .title{
+        background-color: #fdbd1b;
+        color: white;
+        position: relative;
+        top: -25px;
+        left: -20%;
+        width: fit-content;
+        padding: 1.5rem 25%;
+        text-align: center;
+    }
+
+    .buttons{
+        width: 30rem;
+        display: flex;
+        justify-content: baseline;
+        margin-left: 10px;
+        position: absolute;
+        bottom: 50px;
+
+        .btn{
+            box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
+            width: fit-content;
+            border-radius: 0;
+            padding: 15px 50px;
+            margin: 0 10px;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+
+        .btn-ingresar{
+            background-color: #e5480b;
+            color: white;
+        }
+
+        .btn-registro{
+            background-color:#eae9e5;
+        }
+    }
+}

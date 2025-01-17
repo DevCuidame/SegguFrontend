@@ -60,6 +60,23 @@
   gap: 2rem;
   padding: 2rem 0;
 
+  .card-none{
+    filter:  brightness(0.5);
+    cursor: auto;
+    pointer-events: none;
+
+    &::after{
+      color: rgb(0, 0, 0);
+      font-size: 1.5rem;
+      font-weight: bold;
+      position: absolute;
+      content: 'Proximamente';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   .card {
     background-color: $color-terciario;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
