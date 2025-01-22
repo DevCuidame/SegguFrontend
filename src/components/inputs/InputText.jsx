@@ -91,7 +91,7 @@ const InputText = ({
 
   const blurSpan = () => {
     if (spanRef.current && (value || '').trim() === '') {
-      spanRef.current.style.top = '0';
+      spanRef.current.style.top = '10px';
       spanRef.current.style.fontSize = '1.5rem';
     }
   };

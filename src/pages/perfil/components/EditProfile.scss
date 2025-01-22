@@ -1,48 +1,34 @@
-@import '../../../../assets/colores.scss';
+@import '../../../assets/colores.scss';
 
-.add-insurance-form {
+.edit-user-form {
     height: 100vh;
-    width: 100%;
-    display: none;
-    backdrop-filter: brightness(0.5);
+    width: 100vw;
     position: absolute;
-    top: -50px;
-    z-index: 10;
+    top: -25px;
+    left: 0;
+    display: none;
     justify-content: center;
     align-items: center;
+    backdrop-filter: brightness(0.5);
+    z-index: 51;
 
-    hr{
-        width: 80%;
-        border: 1px solid black;
-        margin-top: 0;
-    }
-
-    .insurance-form {
+    .user-form {
         background-color: white;
+        height: 80%;
         width: 50%;
-        height: 75%;
-        padding: 25px;
+        padding: 2rem 4rem;
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .title-insurance-form{
-            margin: 15px 0;
-            margin-left: 10%;
-            align-self: flex-start;
-        }
-
-        .inputs-form{
+        .inputs-form {
             width: 100%;
-            padding: 25px 0;
+            margin: 15px 0;
             display: flex;
             flex-direction: column;
+            gap: 25px;
             align-items: center;
             overflow-y: scroll;
-
-            .inputDiv{
-                margin: 15px 0;
-            }
         }
 
         .buttons{
@@ -75,11 +61,5 @@
                 background-color:#eae9e5;
             }
         }
-    }
-
-    .errors-alert{
-        position: absolute;
-        bottom: 30px;
-        left: 0;
     }
 }

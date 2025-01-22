@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Inputs from '../../../../../components/inputs/InputText';
 import InputDate from '../../../../../components/inputs/InputDate';
 import InputImg from '../../../../../components/inputs/InputImg';
+import ErrorPopUp from '../../../../../components/errors/ErrorPopUp';
+import { validateSegmentNewUser } from '../../../../../context/Validators';
 import './RegisterForm.scss';
 
 import { useAuthService } from '../../../../../services/AuthUser.service';
@@ -10,6 +12,7 @@ import { useAuthService } from '../../../../../services/AuthUser.service';
 const RegisterForm = ({ closeRegister }) => {
   const { registerUser } = useAuthService();
   const navigate = useNavigate();
+    const [error, setError] = useState([]);
   const [currentSegment, setCurrentSegment] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +25,7 @@ const RegisterForm = ({ closeRegister }) => {
     company: '',
     role: '',
     locate: '',
-    img_profile_path: null,
+    img_profile_path: '',
     user_type: 'User',
   });
 
@@ -36,6 +39,19 @@ const RegisterForm = ({ closeRegister }) => {
   };
 
   const handleNextSegment = () => {
+    setError([]);
+
+    const segmentErrors = validateSegmentNewUser(currentSegment, formData);
+    const allErrors = Object.values(segmentErrors).map((msg) => ({
+      id: `segment-${currentSegment}-${Math.random()}`,
+      message: msg,
+    }));
+
+    if (allErrors.length > 0) {
+      setError(allErrors);
+      return;
+    }
+
     setCurrentSegment((prev) => prev + 1);
   };
 
@@ -51,6 +67,22 @@ const RegisterForm = ({ closeRegister }) => {
       console.log(err.message);
     }
   };
+
+    //----------------------------------------------------- Métodos para manejar los errores -----------------------------------------------------//
+
+    const renderErrorPopUps = () => {
+      return error.map((err) => (
+        <ErrorPopUp
+          key={err.id}
+          message={err.message}
+          onClose={() => handleCloseError(err.id)}
+        />
+      ));
+    };
+  
+    const handleCloseError = (id) => {
+      setError((prevErrors) => prevErrors.filter((error) => error.id !== id));
+    };
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
@@ -197,7 +229,12 @@ const RegisterForm = ({ closeRegister }) => {
 
       {currentSegment === 3 && (
         <div className="segment">
-          <InputImg onChange={handleFileChange} />
+          <InputImg
+              name="img_profile_path"
+              value={formData.img_profile_path}
+              onChange={handleFileChange}
+          />
+
           <div className="buttons">
             <button
               type="button"
@@ -213,6 +250,10 @@ const RegisterForm = ({ closeRegister }) => {
           </div>
         </div>
       )}
+
+      <div className='errors-alert'>
+        {renderErrorPopUps()}
+      </div>
     </form>
   );
 };

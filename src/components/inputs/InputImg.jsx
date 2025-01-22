@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-
 const InputImg = ({ name, value, onChange }) => {
-  const [preview, setPreview] = useState(value || null);
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && ["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
       const reader = new FileReader();
       reader.onload = () => {
         const base64Image = reader.result;
-        setPreview(base64Image); // Actualiza la previsualización.
-        onChange(base64Image); // Actualiza el estado en el componente padre con base64Image.
+        onChange(base64Image); // Actualiza el estado en el padre.
       };
       reader.readAsDataURL(file);
     } else {
-      setPreview(null);
-      onChange(null); // En caso de archivo inválido, limpiamos el estado.
+      onChange(null); // Limpia la imagen en caso de error.
     }
   };
 
@@ -26,12 +20,12 @@ const InputImg = ({ name, value, onChange }) => {
         accept="image/jpeg, image/png, image/jpg"
         onChange={handleFileChange}
         style={{ display: "none" }}
-        id="foto-upload"
+        id={`foto-upload-${name}`} // Usar un id único basado en `name` para evitar conflictos.
       />
-      <label htmlFor="foto-upload" style={{ position: "relative", display: "inline-block" }}>
-        {preview ? (
+      <label htmlFor={`foto-upload-${name}`} style={{ position: "relative", display: "inline-block" }}>
+        {value ? (
           <img
-            src={preview}
+            src={value} // Mostrar la vista previa desde `value`.
             alt="Vista previa"
             style={{
               width: "150px",

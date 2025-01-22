@@ -3,9 +3,9 @@
   "name": "Seggu",
   "icons": [
     {
-      "src": "assets/logo.png",
+      "src": "./assets/logo.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "224x106"
     }
   ],
   "start_url": ".",

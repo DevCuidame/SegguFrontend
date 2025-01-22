@@ -1,0 +1,43 @@
+.error-popup {
+    background-color: #ff4d4f;
+    color: white;
+    width: 24rem;
+    padding: 1rem 1.5rem;
+    margin: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-out;
+  
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    &__message {
+      font-size: 1rem;
+      margin-right: 1rem;
+    }
+  
+    &__close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  
+  // Fade-in animation
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  

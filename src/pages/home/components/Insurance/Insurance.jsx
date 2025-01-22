@@ -5,11 +5,12 @@ import './Insurance.scss';
 
 function InsuranceCompoent ({ insurance }) {
     const [isModalOpen, setIsModalOpen] = useState(false); 
-    const [document, setDocument] = useState({
-        type: 'pdf',
-        src: './example.pdf',
-    });
+    const [document, setDocument] = useState(false);
 
+    const handleDocumentClick = (document) => {
+        setDocument(document);
+        setIsModalOpen(true);
+    };
 
     return(
         <div className="insurance-card">
@@ -21,19 +22,20 @@ function InsuranceCompoent ({ insurance }) {
 
                 <nav className="arriba">
 
-                    <NavContainer 
-                        title={"COBERTURA"}
-                        description={insurance.coverage}
-                        style={{backgroundColor: "#e4450f"}}
-                        onClick={() => setIsModalOpen(true)}
-                    />
+                    <div
+                        className="nav-container"
+                        onClick={() => handleDocumentClick(insurance.coverage)}
+                    >
+                        <h6 style={{backgroundColor: "#e4450f"}}>COBERTURA</h6>
+                    </div>
 
-                    <NavContainer 
-                        title={"ASISTENCIA"}
-                        description={insurance.asist}
-                        style={{backgroundColor: "#e9bd31", color: "black"}}
-                        onClick={() => setIsModalOpen(true)}
-                    />
+                    <div
+                        className="nav-container"
+                        onClick={() => handleDocumentClick(insurance.asist)}
+                    >
+                        <h6 style={{backgroundColor: "#e9bd31",  color: "black"}}>ASISTENCIA</h6>
+                    </div>
+
                 </nav>
 
                 <section className="medio">
@@ -93,43 +95,13 @@ function InsuranceCompoent ({ insurance }) {
 
             {isModalOpen && (
                 <DocumentPopUp
-                documentType={document.type}
-                documentSrc={document.src}
+                documentType={"pdf"}
+                documentSrc={document}
                 onClose={() => setIsModalOpen(false)}
                 />
             )}
         </div>
     );
 }
-
-function NavContainer({ title, description, style, onClick }) {
-  const [isPopupVisible, setPopupVisible] = useState(false);
-
-  const showPopup = () => {
-    setPopupVisible(true);
-  };
-
-  const hidePopup = () => {
-    setPopupVisible(false);
-  };
-
-  return (
-    <div
-      className="nav-container"
-      onMouseEnter={showPopup}
-      onMouseLeave={hidePopup}
-      onClick={onClick}
-    >
-      <h6 style={style}>{title}</h6>
-
-      {isPopupVisible && (
-        <div className="popup-info">
-          <p>{description}</p>
-        </div>
-      )}
-    </div>
-  );
-}
-
 
 export default InsuranceCompoent;

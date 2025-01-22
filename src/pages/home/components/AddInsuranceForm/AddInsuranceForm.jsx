@@ -3,7 +3,10 @@ import InputText from '../../../../components/inputs/InputText';
 import InputDate from '../../../../components/inputs/InputDate';
 import InputSelect from '../../../../components/inputs/InputSelect';
 import InputImg from '../../../../components/inputs/InputImg';
+import InputFile from '../../../../components/inputs/InputFile';
+import ErrorPopUp from '../../../../components/errors/ErrorPopUp';
 import { useInsuranceService } from '../../../../services/Insurance.service';
+import { validateInsuranceForm, validateActiveForm, validateBeneficiaryForm } from '../../../../context/Validators';
 
 import './AddInsuranceForm.scss';
 
@@ -17,8 +20,8 @@ const AddInsuranceForm = () => {
     type: '',
     renewal_date: '',
     description: '',
-    coverage: null,
-    asist: null,
+    coverage: '',
+    asist: '',
     category: null,
     policy_number: '',
     company_id: '4',
@@ -49,7 +52,7 @@ const AddInsuranceForm = () => {
     registration_date: '',
   });
   const [beneficiaryFormData, setBeneficiaryFormData] = useState({
-    img_profile_path: '',
+    img_person: '',
     name: '',
     citizenship_card: '',
     role: '',
@@ -64,11 +67,21 @@ const AddInsuranceForm = () => {
 
   const { createInsurance } = useInsuranceService();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState([]);
+
 
   const isAutoInsurance = insuranceFormData.product === 'Seguro de Auto';
 
-  // Función para manejar el cambio de los datos en los form datas
+  const closeAddInsuranceForm = () => {
+    const insuranceForm = document.querySelector('.add-insurance-form');
+    const mainHomr = document.querySelector('.main-home');
+
+    insuranceForm.style.display = 'none';
+    mainHomr.style.overflowY = 'scroll';
+  };
+
+  //----------------------------------------------------- Métodos para manejar los Inputs -----------------------------------------------------//
+
   const handleChange = (e, formType) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -88,41 +101,64 @@ const AddInsuranceForm = () => {
     }));
   };
 
-  const handleFileChange = ({ target: { name, value } }, formType) => {
-    if (value && value.startsWith("data:image")) {
-      formSetters[formType]((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    } else {
-      alert("Por favor, sube una imagen válida en formato base64.");
+  const handleFileChange = (base64Image, formType, fieldName) => {
+    if (!base64Image) {
+      alert("No se pudo procesar la imagen.");
+      return;
     }
+  
+    formSetters[formType]((prevState) => ({
+      ...prevState,
+      [fieldName]: base64Image, // Guarda la imagen en Base64.
+    }));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Esto previene que la página se recargue
+    e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
-
+    setError([]);
+    
+    const insuranceErrors = validateInsuranceForm(insuranceFormData);
+    const activeErrors = isAutoInsurance ? validateActiveForm(activeFormData) : {};
+    const beneficiaryErrors = !isAutoInsurance ? validateBeneficiaryForm(beneficiaryFormData) : {};
+    
+    const allErrors = [
+      ...Object.values(insuranceErrors).map(msg => ({ id: `insurance-${Math.random()}`, message: msg })),
+      ...Object.values(activeErrors).map(msg => ({ id: `active-${Math.random()}`, message: msg })),
+      ...Object.values(beneficiaryErrors).map(msg => ({ id: `beneficiary-${Math.random()}`, message: msg }))
+    ];
+  
+    if (allErrors.length > 0) {
+      setError(allErrors);
+      setIsSubmitting(false);
+      return;
+    }
+  
     try {
-      console.log(insuranceFormData, activeFormData, beneficiaryFormData);
       await createInsurance(insuranceFormData, activeFormData, beneficiaryFormData);
       alert('¡Seguro creado exitosamente!');
-      
     } catch (err) {
-      setError(err.message);
       console.error('Error al crear el seguro:', err.message);
+      setError([{ id: `general-${Math.random()}`, message: 'Ocurrió un error al registrar el seguro. Por favor, intenta de nuevo.' }]);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const closeAddInsuranceForm = () => {
-    const insuranceForm = document.querySelector('.add-insurance-form');
-    const mainHomr = document.querySelector('.main-home');
+  //----------------------------------------------------- Métodos para manejar los errores -----------------------------------------------------//
 
-    insuranceForm.style.display = 'none';
-    mainHomr.style.overflowY = 'scroll';
+  const renderErrorPopUps = () => {
+    return error.map((err) => (
+      <ErrorPopUp
+        key={err.id}
+        message={err.message}
+        onClose={() => handleCloseError(err.id)}
+      />
+    ));
+  };
+
+  const handleCloseError = (id) => {
+    setError((prevErrors) => prevErrors.filter((error) => error.id !== id));
   };
 
   return (
@@ -183,8 +219,24 @@ const AddInsuranceForm = () => {
             value={insuranceFormData.renewal_date}
             onChange={(e) => handleDateChange(e, 'insurance')}
           />
+          <InputFile
+            name="coverage"
+            span="Archivo cobertura"
+            inputClass="custom-input-class"
+            value={insuranceFormData.coverage}
+            onChange={(base64) => handleFileChange(base64,"insurance", "coverage")}
+          />
+          <InputFile
+            name="asist"
+            span="Archivo asistencia"
+            inputClass="custom-input-class"
+            value={insuranceFormData.asist}
+            onChange={(base64) => handleFileChange(base64,"insurance", "asist")}
+          />
 
-          {/*  TODO: Agregar los campos para lis inputs file de asist y coverage  */}
+          <br />
+          <hr />
+          <br />
 
           {/* Campos específicos para Active */}
           {isAutoInsurance && (
@@ -380,14 +432,9 @@ const AddInsuranceForm = () => {
           {!isAutoInsurance && (
             <>
               <InputImg
-                name="img_profile_path"
-                value={beneficiaryFormData.img_profile_path}
-                onChange={(base64Image) =>
-                  handleFileChange(
-                    { target: { name: "img_profile_path", value: base64Image } },
-                    "beneficiary"
-                  )
-                }
+                name="img_person"
+                value={beneficiaryFormData.img_person}
+                onChange={(base64) => handleFileChange(base64, "beneficiary", "img_person")}
               />
               <InputText
                 type="text"
@@ -455,6 +502,9 @@ const AddInsuranceForm = () => {
           </button>
         </div>
       </form>
+      <div className='errors-alert'>
+        {renderErrorPopUps()}
+      </div>
     </div>
   );
 };
