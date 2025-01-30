@@ -30,6 +30,7 @@ const LoginForm = ({ onRegister }) => {
       <Inputs
         type="text"
         span="Usuario"
+        name="userInput"
         value={userInput}
         placeholderClass="span-email"
         inputClass="input-email"
@@ -40,6 +41,7 @@ const LoginForm = ({ onRegister }) => {
       <Inputs
         type="password"
         span="Contraseña"
+        name="password"
         value={password}
         placeholderClass="span-password"
         inputClass="input-password"

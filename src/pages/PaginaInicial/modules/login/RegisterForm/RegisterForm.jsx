@@ -59,7 +59,9 @@ const RegisterForm = ({ closeRegister }) => {
     setCurrentSegment((prev) => prev - 1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
       await registerUser(formData);
       navigate('/home');
@@ -86,6 +88,7 @@ const RegisterForm = ({ closeRegister }) => {
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
+
       {currentSegment === 0 && (
         <div className="segment">
           <Inputs

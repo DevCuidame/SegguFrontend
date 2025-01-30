@@ -1,14 +1,15 @@
 .register-form{
     height: 100%;
     width: 50%;
+    filter: opacity(1);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: flex-end;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    transition: filter 1s ease;
+    transition: all 1s ease;
 
     .segment{
-        height: 100%;
+        height: 85%;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -30,9 +31,8 @@
         .buttons{
             display: flex;
             margin-left: 10px;
-            margin-top: 15px;
+            margin-top: 25px;
             justify-content: center;
-            position: absolute;
             bottom: 50px;
 
             .btn{

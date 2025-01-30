@@ -47,9 +47,6 @@ export const useInsuranceService = () => {
         beneficiaryResponse = await response.json();
       }
 
-      console.log('activeResponse:', activeResponse);
-      console.log('beneficiaryResponse:', beneficiaryResponse);
-
       // Crear el seguro
       const responseInsurance = await fetch(`${API_BASE_URL}/insurances`, {
         method: 'POST',

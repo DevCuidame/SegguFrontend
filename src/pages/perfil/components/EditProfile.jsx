@@ -56,6 +56,7 @@ const EditProfile = ({ user, onClose }) => {
     setError(null);
 
     try {
+      console.log('modifiedFields:', modifiedFields);
       await uploadPerfilInfo(modifiedFields);
       alert('¡Usuario actualizado exitosamente!');
     } catch (err) {

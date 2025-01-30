@@ -47,7 +47,7 @@ function DataPerfil() {
             <img src="/assets/perfil-bg.jpg" alt="bg" className="bg" />
 
             <section className="img-perfil">
-                <img src="/assets/perfil.jpg" alt="perfil-foto" />
+            <img src={perfil.img_profile_path || "/assets/perfil.jpg"} alt="perfil-foto" />
 
                 <div className="hola">
                     <h6>¡Hola!</h6>

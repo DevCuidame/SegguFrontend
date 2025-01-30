@@ -22,9 +22,6 @@ export const usePerfilService = () => {
   const uploadPerfilInfo = useCallback(async ( userData ) => {
     const user = getUser();
 
-    console.log(user);
-    console.log(userData);
-
     if (!user || !user.id) throw new Error('Usuario no autenticado');
 
     const response= await fetch(`${API_BASE_URL}/users/${user.id}`, {

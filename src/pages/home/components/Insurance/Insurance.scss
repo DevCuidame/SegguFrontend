@@ -79,8 +79,12 @@
                 display: flex;
                 gap: 1rem;
 
-                span{
-                    margin-left: 5px;
+                .linea-seguro {
+                    display: flex;
+
+                    p{
+                        margin-left: 5px;
+                    }
                 }
             }
 

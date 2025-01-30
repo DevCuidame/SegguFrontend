@@ -8,45 +8,34 @@ const InputDate = ({
   span,
   inputClass,
   onChange,
-  onFocus,
-  onBlur,
 }) => {
-  const spanRef = React.useRef(null);
-  
-  const focusSpan = () => {
-    if (spanRef.current) {
-      spanRef.current.style.top = '-25px';
-      spanRef.current.style.fontSize = '1.25rem';
-    }
-  };
-  
+  const inputRef = React.useRef(null);
 
-  const blurSpan = () => {
-    if (spanRef.current && (value || '').trim() === '') {
-      spanRef.current.style.top = '10px';
-      spanRef.current.style.fontSize = '1.5rem';
+  // Manejar el clic para abrir el calendario
+  const handleFocusInput = (e) => {
+    e.preventDefault();
+    if (inputRef.current) {
+      inputRef.current.showPicker(); // Método para abrir el calendario en navegadores modernos
     }
   };
 
   return (
-    <div className={`inputDiv ${name}`}>
-      <span ref={spanRef} className="input-span">{span}</span>
+    <div 
+      className={`inputDiv ${name}`} 
+      onClick={handleFocusInput} // Detectar clic en todo el contenedor
+      style={{ cursor: 'pointer' }}
+    >
+      <span className="input-span" style={{ top: '-25px' }}>
+        {span}
+      </span>
 
       <input
         type="date"
         name={name}
         className={inputClass}
-        value={value || ''} // Asignamos el valor o una cadena vacía como fallback
-        onChange={onChange} // Debe actualizar el estado en el componente padre
-        onFocus={(event) => {
-          focusSpan();
-          if (onFocus) onFocus(event); // Llamamos a onFocus del padre
-        }}
-        onBlur={(event) => {
-          blurSpan();
-          if (onBlur) onBlur(event); // Llamamos a onBlur y le pasamos el evento
-        }}
-        autoComplete="on"
+        value={value || ''} 
+        onChange={onChange}
+        ref={inputRef} // Referencia para controlar el calendario
       />
       <picture className="icon">
         <svg
@@ -67,12 +56,10 @@ const InputDate = ({
 
 InputDate.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string, // Debe ser controlado por el padre
+  value: PropTypes.string, // Controlado por el padre
   span: PropTypes.string.isRequired,
   inputClass: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired, // La función que actualiza el estado del padre
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
+  onChange: PropTypes.func.isRequired, // Función para actualizar el estado
 };
 
 export default InputDate;

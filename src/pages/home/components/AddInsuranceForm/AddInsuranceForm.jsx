@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputText from '../../../../components/inputs/InputText';
 import InputDate from '../../../../components/inputs/InputDate';
 import InputSelect from '../../../../components/inputs/InputSelect';
@@ -6,6 +6,7 @@ import InputImg from '../../../../components/inputs/InputImg';
 import InputFile from '../../../../components/inputs/InputFile';
 import ErrorPopUp from '../../../../components/errors/ErrorPopUp';
 import { useInsuranceService } from '../../../../services/Insurance.service';
+import { useCompaniesService } from '../../../../services/Companies.service';
 import { validateInsuranceForm, validateActiveForm, validateBeneficiaryForm } from '../../../../context/Validators';
 
 import './AddInsuranceForm.scss';
@@ -24,7 +25,7 @@ const AddInsuranceForm = () => {
     asist: '',
     category: null,
     policy_number: '',
-    company_id: '4',
+    company_id: '',
   });
   const [activeFormData, setActiveFormData] = useState({
     product: '',
@@ -64,13 +65,27 @@ const AddInsuranceForm = () => {
     active: setActiveFormData,
     beneficiary: setBeneficiaryFormData,
   };
+  const isAutoInsurance = insuranceFormData.product === 'Seguro de Auto';
+
 
   const { createInsurance } = useInsuranceService();
+  const { getAllCompanies } = useCompaniesService();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState([]);
+  const [companies, setCompanies] = useState([]);
 
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const data = await getAllCompanies(); // Espera a que la promesa se resuelva
+        setCompanies(data); // Asigna el resultado a la constante de estado
+      } catch (error) {
+        console.error('Error al obtener las compañías:', error);
+      }
+    };
 
-  const isAutoInsurance = insuranceFormData.product === 'Seguro de Auto';
+    fetchCompanies(); // Llama a la función asincrónica
+  }, [getAllCompanies]);
 
   const closeAddInsuranceForm = () => {
     const insuranceForm = document.querySelector('.add-insurance-form');
@@ -211,6 +226,19 @@ const AddInsuranceForm = () => {
             inputClass="input-field"
             onChange={(e) => handleChange(e, 'insurance')}
             iconName="person"
+          />
+          <InputSelect
+            name="company_id"
+            value={insuranceFormData.company_id}
+            span="Empresa aseguradora"
+            options={[
+              { value: '', label: 'Seleccione una opción' }, // Primera opción
+              ...companies.map((company) => ({
+                value: company.company_id,
+                label: company.name,
+              })),
+            ]}
+            onChange={(e) => handleChange(e, 'insurance')}
           />
           <InputDate
             name="renewal_date"
@@ -458,7 +486,7 @@ const AddInsuranceForm = () => {
                 type="text"
                 name="role"
                 value={beneficiaryFormData.role}
-                span="Role"
+                span="Empleo"
                 inputClass="input-field"
                 onChange={(e) => handleChange(e, 'beneficiary')}
                 iconName="group"

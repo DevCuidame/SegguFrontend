@@ -1,11 +1,7 @@
 @import '../../assets/colores.scss';
+@import '../../assets/sizeResponsive.scss';
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 5rem;
-    width: 30%;
     background-color: $color-primario;
     text-align: center;
     padding: 10px 0;
@@ -25,6 +21,25 @@
                 color: $color-hover;
             }
         }
+    }
+}
+
+@media (min-width: $breakpoint-tablet) {
+    .footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 5rem;
+        width: 30%;
+
+    }
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .footer {
+        height: 5rem;
+        position: relative;
+        bottom: 5rem;
     }
 }
   

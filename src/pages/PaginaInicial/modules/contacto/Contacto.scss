@@ -1,24 +1,16 @@
 @import '../../../../assets/colores.scss';
+@import '../../../../assets/sizeResponsive.scss';
 
 .contacto-module {
     background-color: $color-bg;
-    height: 100%;
+    height: calc(100% - 5rem);
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     .contacto {
         background-color: $color-terciario;
-        height: 70%;
-        width: 65%;
-        position: relative;
-        padding: 100px 50px;
         box-shadow: -10px 10px 15px 0px rgba(145,145,145,1);
 
         .form-contacto {
-            height: 100%;
-            width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -28,57 +20,13 @@
                 h1,
                 p {
                     color: $color-texto-secundario; 
-                    font-weight: 400;
-                }
-            }
-
-            .input {
-                height: 4rem;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border-top: 1.5px solid $color-texto-secundario;
-
-                span,
-                picture {
-                    position: relative;
-                    color: $color-texto-secundario;
-                    z-index: 3;
-                }
-
-                span {
-                    background-color: $color-terciario;
-                    font-size: 1.5rem;
-                    margin-left: 30px;
-                    padding: 0 10px;
-                    z-index: 1;
-                    transition: top 0.3s ease, font-size 0.3s ease;
-                }
-
-                input {
-                    background-color: transparent;
-                    position: absolute;
-                    height: 4rem;
-                    width: 35%;
-                    padding: 0 40px;
-                    border: none;
-                    outline: none;
-                    z-index: 5;
-
-                    &:hover {
-                        $span-psoition: -35px;
-                    }
                 }
             }
 
             .btn {
                 background-color: #e5480b;
                 color: white;
-                width: fit-content;
                 border-radius: 0;
-                padding: 10px 30%;
-                margin: 10px 0;
                 box-shadow: 0px 0px 15px 0px rgba(235,235,235,1);
 
                 &:hover {
@@ -91,17 +39,10 @@
         .informacion {
             background-color: $color-header-secundario;
             color: white;
-            height: 60%;
-            width: 40%;
-            padding: 30px;
             padding-right: 0;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translate(0, -50%);
             z-index: 5;
 
             h1{
@@ -117,12 +58,240 @@
 
         .bg{
             background-color: $color-primario;
-            height: 100%;
-            width: 25%;
             position: absolute;
             top: 0;
             right: 0;
-            z-index: 1;
+            z-index: 3;
+        }
+    }
+}
+
+// Estilos para dispositivos de escritorio
+@media (min-width: $breakpoint-desktop) {
+    .contacto-module {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        .contacto {
+            height: 70%;
+            width: 65%;
+            position: relative;
+            padding: 30px 0;
+    
+            .form-contacto {
+                height: 100%;
+                width: 60%;
+    
+                .title {
+                    margin-bottom: 25px;
+    
+                    h1 { 
+                        font-weight: bold;
+                    }
+
+                    p {
+                        width: 90%;
+                    }
+                }
+
+                .inputs {
+                    .inputDiv {
+                        width: 90%;
+                        margin-bottom: 15px;
+                    }
+                }
+    
+                .btn {
+                    width: fit-content;
+                    border-radius: 0;
+                    padding: 10px 30%;
+                    margin-top: 25px;
+                }
+
+                .title, .btn {
+                    margin-left: 50px;
+                }
+    
+            }
+    
+            .informacion {
+                height: 60%;
+                width: 40%;
+                padding: 30px;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translate(0, -50%);
+    
+                h1{
+                    font-weight: 400;
+                }
+    
+                .span-info{
+                    font-size: 1.1rem;
+                    margin-left: 1rem;
+                    font-weight: 600;
+                }
+    
+            }
+    
+            .bg{
+                background-color: $color-primario;
+                height: 100%;
+                width: 25%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 1;
+            }
+        }
+    }
+}
+
+@media (min-width: calc($breakpoint-tablet + 1px)) and (max-width:calc($breakpoint-desktop + 216px)) {
+    .contacto-module {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .contacto {
+            height: 70%;
+            width: 100%;
+            padding: 0;
+            position: relative;
+
+            .form-contacto {
+                height: 100%;
+                width: 50%;
+                margin: 25px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .title {
+                    margin: 0 25px 25px;
+
+                    h1 {
+                        font-size: 2.5rem;
+                        font-weight: bold;
+                    }
+                }
+
+                .inputs{
+                    margin-top: -50px;
+
+                    .inputDiv {
+                        width: 100%;
+                        margin-top: 25px;
+                    }
+                }
+
+                .btn {
+                    width: 10rem;
+                    margin-bottom: 60px;
+                    margin-left: 25px;
+                    font-weight: bold;
+                }
+
+            }
+
+            .informacion {
+                height: 70%;
+                width: 40%;
+                padding: 30px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                transform: translateY(25%);
+
+                h1{
+                    font-weight: bold;
+                }
+
+                .span-info{
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-left: 1rem;
+                }
+
+            }
+
+            .bg{
+                height: 100%;
+                width: 7%;
+            }
+        }
+    }
+}
+
+// Estilos para dispositivos de celular
+@media (max-width: calc($breakpoint-tablet)) {
+    .contacto-module {
+
+        .contacto {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            overflow-y: scroll;
+
+            .form-contacto {
+                height: 90%;
+                width: 100%;
+                margin: 25px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .title {
+                    margin: 50px 25px -25px;
+
+                    h1 {
+                        font-size: 2.5rem;
+                        font-weight: bold;
+                    }
+                }
+
+                .inputs{
+                    gap: 15px;
+
+                    .inputDiv {
+                        width: 100%;
+                        margin-top: 25px;
+                    }
+                }
+
+                .btn {
+                    width: 10rem;
+                    margin: -15px 25px 25px;
+                    font-weight: bold;
+                }
+
+            }
+
+            .informacion {
+                height: 40%;
+                width: 100%;
+                padding: 30px;
+                position: relative;
+
+
+                h1{
+                    font-weight: bold;
+                }
+
+                .span-info{
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    margin-left: 1rem;
+                }
+
+            }
+
+            .bg{
+                height: 125%;
+                width: 7%;
+            }
         }
     }
 }

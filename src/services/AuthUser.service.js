@@ -62,6 +62,8 @@ export const useAuthService = () => {
 
   const registerUser = async (userData) => {
     try {
+      console.log(userData);  // Verifica que tengas los datos del usuario a registrar
+
       const response = await fetch(`${API_BASE_URL}/users/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,12 +74,9 @@ export const useAuthService = () => {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Error al registrar usuario');
       }
+  
+      await loginUser(userData.username, userData.password); // Inicia sesión automáticamente después de registrarse
 
-      const { user, token } = await response.json();
-
-      login({ user, token });
-
-      return { user, token };
     } catch (error) {
       console.error('Error en registerUser:', error.message);
       throw new Error('Error al registrar usuario o conexión con el servidor');

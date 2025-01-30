@@ -1,18 +1,14 @@
 @import '../../../../assets/colores.scss';
+@import '../../../../assets/sizeResponsive.scss';
 
+// Estilos Generales
 .pagina-inicial {
-  height: 100%;
+  height: calc(100vh - 5rem);
   background-color: $color-secundario;
   color: $color-texto;
   font-family: 'Arial', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
 
   .text-section {
-    max-width: 40%;
-    margin-left: 10%;
 
     h2 {
       color: $color-texto;
@@ -25,92 +21,260 @@
       font-size: 1rem;
       line-height: 1.5;
     }
+    
+    .cards-section {
+      gap: 2rem;
+      padding: 2rem 0;
+    
+      .card-none{
+        filter:  brightness(0.5);
+        cursor: auto;
+        pointer-events: none;
+    
+        &::after{
+          color: rgb(0, 0, 0);
+          font-size: 1.5rem;
+          font-weight: bold;
+          position: absolute;
+          content: 'Proximamente';
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+        }
+      }
+    
+      .card {
+        background-color: $color-terciario;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-bottom: 0.75rem solid #d4501b;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: card-animation 0.5s ease;
+      
+        .content {
+          z-index: 2;
+    
+          .icon{
+            transition: color 0.9s ease;
+          }
+      
+          h3 {
+            color: $color-texto-terciario;
+            transition: color 0.7s ease;
+          }
+      
+          h4, .card-link {
+            color: $color-texto-secundario;
+            font-weight: lighter;
+            transition: color 0.5s ease;
+          }
+      
+          p {
+            color: $color-texto-secundario;
+            margin-top: 0;
+            margin-bottom: 5px;
+            transition: color 0.3s ease; 
+          }
+        }
+      
+        .hover-color {
+          background-color: #d4501b;
+          height: 0;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          bottom: -0.75rem;
+          border-radius: 5px;
+          z-index: 1;
+          transition: height 1s ease;
+        }
+      
+        &:hover .hover-color {
+          height: calc(100% + 0.75rem);
+        }
+    
+        &:hover h3, &:hover h4, &:hover p, &:hover .icon, &:hover .card-link {
+          color: white;
+        }
+      
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
   }
 
   .imagenes{
     background-color: $color-primario;
-    width: 45rem;
-    height: 45rem;
-    aspect-ratio: 1 / 1;
-    position: relative;
-    top: -100px;
-    right: -130px;
-    transform: scale(1.1);
-    border-radius: 50%;
     box-shadow: 0 4px 10px rgba(243,216,151,255);
     z-index: 2;
 
     .circular-image {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        width: 40rem;
-        height: 40rem;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
         box-shadow: 0 0px 20px 10px rgba(242, 146, 22, 100);
-        object-fit: cover;
+      }
+  }
+}
+
+// Estilos para dispositivos de escritorio
+@media (min-width: $breakpoint-desktop) {
+  .pagina-inicial {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    .text-section {
+      max-width: 40%;
+      margin-left: 10%;
+
+      .cards-section {
+        display: flex;
+        justify-content: center;
+    
+        .card {
+          width: 300px;
+          padding: 1.5rem;
+        
+        }
       }
     }
-}
 
-.cards-section {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem 0;
+    .imagenes{
+      width: 45rem;
+      height: 45rem;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      top: -100px;
+      right: -130px;
+      transform: scale(1.1);
+      border-radius: 50%;
+      z-index: 2;
 
-  .card-none{
-    filter:  brightness(0.5);
-    cursor: auto;
-    pointer-events: none;
-
-    &::after{
-      color: rgb(0, 0, 0);
-      font-size: 1.5rem;
-      font-weight: bold;
-      position: absolute;
-      content: 'Proximamente';
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .card {
-    background-color: $color-terciario;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    width: 300px;
-    border-bottom: 0.75rem solid #d4501b;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    h3 {
-      color: $color-texto-terciario;
-    }
-
-    h4{
-      color: $color-texto-secundario;
-      font-weight: lighter;
-    }
-
-    h3, h4{
-      font-size: 1.5rem;
-      margin: 4px 0;
-    }
-
-    p {
-      color: $color-texto-secundario;
-      font-size: 1rem;
-      margin-top: 0;
-      margin-bottom: 5px;
-      max-width: 80%;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
+      .circular-image {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          width: 40rem;
+          height: 40rem;
+          aspect-ratio: 1 / 1;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
   }
 }
 
+// Estilos para dispositivos tablet
+@media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-desktop) {
+  .pagina-inicial {
+    margin-bottom: 5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+    .text-section {
+      width: 100%;
+      padding: 50px;
+      overflow-y: scroll;
+      margin-bottom: 50px;
+
+      .cards-section {
+        display: flex;
+        justify-content: center;
+    
+        .card {
+          width: 70%;
+          padding: 1.5rem;
+        }
+      }
+    }
+
+    .imagenes{
+      width: 100%;
+      height: 30vh;
+      position: relative;
+      z-index: 2;
+
+      .circular-image {
+          width: 100%;
+          height: 30vh;
+          object-fit: cover;
+        }
+      }
+  }
+}
+
+// Estilos para dispositivos celulares
+@media (max-width: $breakpoint-mobile) {
+  .pagina-inicial {
+    height: 100%;
+    margin-bottom: 5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+    .text-section {
+      width: 100%;
+      padding: 50px;
+      overflow-y: scroll;
+      margin-bottom: 50px;
+
+      .cards-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        .card {
+          width: 100%;
+          padding: 0.75rem;
+        
+          .content {
+            display: flex;
+            width: 100%;
+            z-index: 2;
+            align-items: center;
+            gap: 15px;    
+        
+            .title {
+              min-width: 40%;
+              order: 1;
+
+              h3,
+              h4 {
+                font-size: 1rem;
+                margin: 4px 0;
+              }
+            }
+
+        
+            .info-text {
+              order: 2;
+
+              p, .card-link{
+                font-size: 0.9rem;
+              }
+            } 
+          }
+        }
+      }
+    }
+
+    .imagenes{
+      width: 100%;
+      height: 20vh;
+      position: relative;
+      z-index: 2;
+
+      .circular-image {
+          width: 100%;
+          height: 20vh;
+          object-fit: cover;
+        }
+      }
+  }
+}

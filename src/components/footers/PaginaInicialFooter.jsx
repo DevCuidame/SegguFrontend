@@ -6,7 +6,6 @@ const FooterPaginaInicial = () => {
     <footer className="footer ">
       <div className="social-links">
         <a 
-          href="#" 
           className='facebook' 
           target="_blank" 
           rel="noopener noreferrer"
@@ -16,7 +15,6 @@ const FooterPaginaInicial = () => {
           </svg>
         </a>
         <a 
-          href="#" 
           className='likendin' 
           target="_blank" 
           rel="noopener noreferrer"

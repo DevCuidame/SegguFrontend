@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './QuienesSomos.scss';
 
 const QuienesSomos = () => {
 
   return (
     <article className="quienes-somos">
+
+      <h2 className="title hidden">Quienes Somos</h2>
+
       <section className="text-section">
         <p>
           Somos una plataforma digital, donde organizamos
@@ -23,11 +25,13 @@ const QuienesSomos = () => {
         <img src="../../../assets/pagInicial-img-1.jpg" alt="Familia feliz" className="circular-image" />
       </section>
 
+      {/*
       <section className="logos">
         <img src="/assets/logos/mapfre-seguros-logo.png" alt="mapfre" className="mapfre" />
         <img src="/assets/logos/sura-logo.png" alt="sura" className="sura" />
         <img src="/assets/logos/equidad-logo.png" alt="equidad" className="equidad" />
       </section>
+      */}
     </article>
   );
 };

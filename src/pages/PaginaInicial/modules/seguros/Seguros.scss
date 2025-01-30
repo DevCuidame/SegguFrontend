@@ -1,11 +1,10 @@
 @import '../../../../assets/colores.scss';
+@import '../../../../assets/sizeResponsive.scss';
 
 .seguros{
     background-color: $color-bg;
     height: 100%;
     width: 100%;
-    margin-top: 69px;
-    padding: 50px 100px;
 
     .title{
         color: $color-texto;
@@ -13,15 +12,7 @@
     }
 
     .seguros-container {
-        height: 100%;
-        width: 100%;
-        padding-bottom: 150px;
-        display: flex;
-        gap: 35px;
-        flex-wrap: wrap;
-        justify-content: center;
-        overflow-y: auto;
-        overflow-x: hidden;
+        gap: 25px;
         scrollbar-width: none;
 
         &::-webkit-scrollbar {
@@ -31,9 +22,6 @@
         // Estilos para el manejo de de los cards para los seguros
         .seguro-card{
             background-color: white;
-            max-height: 37rem;
-            max-width: 20rem;
-            margin: 15px;
 
             img{
                 height: 12rem;
@@ -71,6 +59,67 @@
                     padding: 10px 15px;
                     border: none;
                     margin-top: auto;
+                }
+            }
+        }
+    }
+}
+
+// Estilos para dispositivos de escritorio
+@media (min-width: calc($breakpoint-tablet + 1px)) {
+    .seguros{
+        padding: 50px 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        .title{
+            align-self: flex-start;
+        }
+    
+        .seguros-container {
+            height: 100%;
+            padding: 0 50px 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            overflow-y: auto;
+            overflow-x: hidden;
+    
+            // Estilos para el manejo de de los cards para los seguros
+            .seguro-card{
+                max-height: 37rem;
+                max-width: 20rem;
+                margin: 15px;
+            }
+        }
+    }
+
+}
+
+// Estilos para dispositivos de celular
+@media (max-width: $breakpoint-tablet) {
+    .seguros{
+        background-color: $color-bg;
+        padding: 35px 25px;
+        margin-bottom: 5rem;
+    
+        .seguros-container {
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            align-items: center;
+            overflow: auto;
+            gap: 30px;
+    
+            // Estilos para el manejo de de los cards para los seguros
+            .seguro-card{
+                max-height: 37rem;
+                max-width: 20rem;
+                margin: 15px;
+
+                .info{
+                    width: 20rem;
                 }
             }
         }
