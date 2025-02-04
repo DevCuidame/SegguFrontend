@@ -12,6 +12,7 @@ function PaginaHome() {
   const { getInsurance } = useInsuranceService();
   const [insurances, setInsurances] = useState([]);
   const hasFetchedRef = useRef(false);
+  
 
   useEffect(() => {
     const fetchInsuranceData = async () => {
@@ -29,11 +30,13 @@ function PaginaHome() {
   }, [getInsurance]);
 
   const openAddInsuranceForm = () => {
-    const insuranceForm = document.querySelector('.add-insurance-form');
+    const addInsuranceForm = document.querySelector('.add-insurance-form');
+    const insuranceForm = document.querySelector('.insurance-form');
     const mainHomr = document.querySelector('.main-home');
 
-    insuranceForm.style.display = 'flex';
+    addInsuranceForm.style.display = 'flex';
     mainHomr.style.overflowY = 'hidden';
+    insuranceForm.style.height = '90%';
   };
 
   return (

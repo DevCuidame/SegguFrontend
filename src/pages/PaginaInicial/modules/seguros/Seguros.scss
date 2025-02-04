@@ -66,7 +66,7 @@
 }
 
 // Estilos para dispositivos de escritorio
-@media (min-width: calc($breakpoint-tablet + 1px)) {
+@media (min-width: calc($breakpoint-desktop - 1px)) {
     .seguros{
         padding: 50px 100px;
         display: flex;
@@ -82,7 +82,7 @@
             padding: 0 50px 150px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             overflow-y: auto;
             overflow-x: hidden;
     
@@ -98,11 +98,14 @@
 }
 
 // Estilos para dispositivos de celular
-@media (max-width: $breakpoint-tablet) {
+@media (max-width: calc($breakpoint-desktop - 2px)) {
     .seguros{
-        background-color: $color-bg;
         padding: 35px 25px;
         margin-bottom: 5rem;
+
+        .title{
+            margin-bottom: 0;
+        }
     
         .seguros-container {
             display: flex;
@@ -110,13 +113,13 @@
             flex-direction: row;
             align-items: center;
             overflow: auto;
-            gap: 30px;
     
             // Estilos para el manejo de de los cards para los seguros
             .seguro-card{
                 max-height: 37rem;
                 max-width: 20rem;
                 margin: 15px;
+                transform: scale(0.9);
 
                 .info{
                     width: 20rem;

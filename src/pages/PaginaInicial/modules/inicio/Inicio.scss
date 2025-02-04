@@ -3,7 +3,7 @@
 
 // Estilos Generales
 .pagina-inicial {
-  height: calc(100vh - 5rem);
+  height: 100%;
   background-color: $color-secundario;
   color: $color-texto;
   font-family: 'Arial', sans-serif;
@@ -120,14 +120,13 @@
 // Estilos para dispositivos de escritorio
 @media (min-width: $breakpoint-desktop) {
   .pagina-inicial {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
 
     .text-section {
-      max-width: 40%;
+      max-width: 45%;
       margin-left: 10%;
 
       .cards-section {
@@ -143,8 +142,8 @@
     }
 
     .imagenes{
-      width: 45rem;
-      height: 45rem;
+      max-width: 45%;
+      min-width: 40%;
       aspect-ratio: 1 / 1;
       position: relative;
       top: -100px;
@@ -154,21 +153,20 @@
       z-index: 2;
 
       .circular-image {
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          width: 40rem;
-          height: 40rem;
-          aspect-ratio: 1 / 1;
-          border-radius: 50%;
-          object-fit: cover;
+        width: 90%;
+        position: absolute;
+        top: 1rem;
+        left: 0rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
         }
       }
   }
 }
 
 // Estilos para dispositivos tablet
-@media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-desktop) {
+@media (min-width: $breakpoint-mobile) and (max-width: calc($breakpoint-desktop - 1px)) {
   .pagina-inicial {
     margin-bottom: 5rem;
     display: flex;
@@ -180,7 +178,6 @@
       width: 100%;
       padding: 50px;
       overflow-y: scroll;
-      margin-bottom: 50px;
 
       .cards-section {
         display: flex;

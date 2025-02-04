@@ -1,65 +1,109 @@
 @import '../../../assets/colores.scss';
+@import '../../../assets/sizeResponsive.scss';
 
 .edit-user-form {
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: -25px;
-    left: 0;
-    display: none;
-    justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: brightness(0.5);
+  z-index: 51;
+
+  .user-form {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    backdrop-filter: brightness(0.5);
-    z-index: 51;
 
-    .user-form {
-        background-color: white;
-        height: 80%;
-        width: 50%;
-        padding: 2rem 4rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .inputs-form {
-            width: 100%;
-            margin: 15px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            align-items: center;
-            overflow-y: scroll;
-        }
-
-        .buttons{
-            width: 100%;
-            padding: 15px 0px;
-            display: flex;
-            margin-left: 10px;
-            justify-content: center;
-            z-index: 15;
-
-            .btn{
-                box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
-                width: fit-content;
-                border-radius: 0;
-                padding: 15px 50px;
-                margin: 0 10px;
-                cursor: pointer;
-
-                &:hover{
-                    transform: scale(1.1);
-                }
-            }
-
-            .btn-siguiente{
-                background-color: #e5480b;
-                color: white;
-            }
-
-            .btn-atras{
-                background-color:#eae9e5;
-            }
-        }
+    .inputs-form {
+      width: 100%;
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      align-items: center;
+      overflow-y: auto; /* Permite el desplazamiento vertical */
+      flex-grow: 1; /* Ocupa el espacio restante */
     }
+
+    .buttons {
+      width: 100%;
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      background-color: white; /* Fondo para que los botones sean legibles */
+      position: sticky; /* Fija los botones en la parte inferior */
+      bottom: 0;
+      z-index: 15;
+
+      .btn {
+        box-shadow: 5px 5px 15px 0 rgba(184, 184, 184, 1);
+        width: fit-content;
+        border-radius: 0;
+        padding: 15px 50px;
+        margin: 0 10px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .btn-siguiente {
+        background-color: #e5480b;
+        color: white;
+      }
+
+      .btn-atras {
+        background-color: #eae9e5;
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .edit-user-form {
+    .user-form {
+      height: 80%;
+      width: 60%;
+      padding: 2rem 4rem;
+    }
+  }
+}
+
+@media (min-width: calc($breakpoint-mobile + 1px)) and (max-width: calc($breakpoint-desktop - 1px)) {
+  .edit-user-form {
+    .user-form {
+      height: 85%;
+      width: 90%;
+      padding: 2rem 1.5rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .edit-user-form {
+    .user-form {
+      width: 100%;
+      max-height: 90vh; /* Limita la altura máxima en móviles */
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      padding: 1rem 1.5rem;
+
+      .inputs-form {
+        max-height: calc(90vh - 150px); /* Ajusta la altura del contenido */
+      }
+
+      .buttons {
+        position: sticky; /* Fija los botones en la parte inferior */
+        bottom: 0;
+        background-color: white; /* Fondo para que los botones sean legibles */
+      }
+    }
+  }
 }

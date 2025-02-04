@@ -18,7 +18,6 @@ const AddInsuranceForm = () => {
     beneficiary_id: '',
     active_id: '',
     product: 'Seguro de Vida',
-    type: '',
     renewal_date: '',
     description: '',
     coverage: '',
@@ -88,11 +87,13 @@ const AddInsuranceForm = () => {
   }, [getAllCompanies]);
 
   const closeAddInsuranceForm = () => {
-    const insuranceForm = document.querySelector('.add-insurance-form');
+    const addInsuranceForm = document.querySelector('.add-insurance-form');
+    const insuranceForm = document.querySelector('.insurance-form');
     const mainHomr = document.querySelector('.main-home');
 
-    insuranceForm.style.display = 'none';
+    addInsuranceForm.style.display = 'none';
     mainHomr.style.overflowY = 'scroll';
+    insuranceForm.style.height = '0';
   };
 
   //----------------------------------------------------- Métodos para manejar los Inputs -----------------------------------------------------//
@@ -189,7 +190,11 @@ const AddInsuranceForm = () => {
               span="Tipo de Seguro"
               options={[
                 { value: 'Seguro de Vida', label: 'Seguro de Vida' },
-                { value: 'Seguro de Auto', label: 'Seguro de Auto' },
+                { value: 'SOAT', label: 'SOAT' },
+                { value: 'Póliza Todo Riesgo – Auto o Moto', label: 'Póliza Todo Riesgo – Auto o Moto' },
+                { value: 'Póliza Todo Riesgo – Moto', label: 'Póliza Todo Riesgo – Moto' },
+                { value: 'Póliza Hogar', label: 'Póliza Hogar' },
+                { value: 'Póliza Responsabilidad Civil Medica', label: 'Póliza Responsabilidad Civil Medica' },
               ]}
               onChange={(e) => handleChange(e, 'insurance')}
           />
@@ -200,15 +205,6 @@ const AddInsuranceForm = () => {
 
           <h2 className='title-insurance-form'>{insuranceFormData.product}</h2>
 
-          <InputText
-            type="text"
-            name="type"
-            value={insuranceFormData.type}
-            span="Tipo de Seguro"
-            inputClass="input-field"
-            onChange={(e) => handleChange(e, 'insurance')}
-            iconName="cardId"
-          />
           <InputText
             type="text"
             name="description"

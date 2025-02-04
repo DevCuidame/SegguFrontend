@@ -56,9 +56,9 @@ const EditProfile = ({ user, onClose }) => {
     setError(null);
 
     try {
-      console.log('modifiedFields:', modifiedFields);
       await uploadPerfilInfo(modifiedFields);
       alert('¡Usuario actualizado exitosamente!');
+      window.location.reload();
     } catch (err) {
       setError(err.message);
       console.error('Error al actualizar el usuario:', err.message);
@@ -149,7 +149,7 @@ const EditProfile = ({ user, onClose }) => {
             type="submit" 
             className="btn btn-siguiente" 
           >
-            Guardar Cambios
+            Guardar
           </button>
         </div>
       </form>

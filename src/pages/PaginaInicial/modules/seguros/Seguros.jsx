@@ -1,51 +1,38 @@
-import './Seguros.scss'
+import ImageLoader from '../../../../components/ImageLoader/ImageLoader';
+import './Seguros.scss';
 
-function Seguros () {
-    return(
+function Seguros() {
+    return (
         <article className="seguros">
             <h1 className="title">Nuestros Seguros</h1>
 
             <section className="seguros-container">
                 <SeguroCard 
+                    urlImg="/assets/seguros/seguro-soat.jpg"
+                    title="SOAT"
+                    description="El Seguro Obligatorio de Accidentes de Tránsito (SOAT) cubre los gastos médicos y los daños a terceros en caso de accidentes de tránsito."
+                />
+                <SeguroCard 
                     urlImg="/assets/seguros/seguro-todo-riesgo.jpg"
-                    title="Todo Riesgo"
-                    description="El seguro todo riesgo para carros y
-                                motos ofrece una cobertura completa
-                                que te protege contra daños propios y
-                                terceros, incluyendo accidentes, robos y
-                                vandalismo. Es una opción ideal para
-                                una protección integral del vehículo."
+                    title="Póliza Todo Riesgo – Auto o Moto"
+                    description="Cobertura completa para autos y motos que incluye daños propios, robos, accidentes y más."
+                />
+                <SeguroCard 
+                    urlImg="/assets/seguros/seguro-moto.jpg"
+                    title="
+                        Póliza Todo Riesgo - Moto"
+                    description="Protección integral para motos contra robos, accidentes, daños a terceros y otros imprevistos."
                 />
                 <SeguroCard 
                     urlImg="/assets/seguros/seguro-hogar.jpg"
-                    title="Hogar"
-                    description="El para tu hogar ofrece una protección
-                                completa contra daños por accidentes,
-                                robos, incendios y otros imprevistos
-                                que puedan afectar la vivienda y sus
-                                bienes. Es ideal para asegurar tanto la
-                                estructura del hogar como las
-                                pertenencias personales en su interior."
+                    title="Póliza Hogar"
+                    description="Protege tu hogar y tus bienes contra incendios, robos, desastres naturales y otros riesgos."
                 />
                 <SeguroCard 
                     urlImg="/assets/seguros/seguro-medico.jpg"
-                    title="Responsabilidad Civil Médica"
-                    description="El seguro de responsabilidad civil
-                                médica cubre a profesionales de la
-                                salud frente a reclamos por daños a
-                                pacientes, incluyendo gastos legales y
-                                compensaciones por posibles errores."
-                />   
-                <SeguroCard 
-                    urlImg="/assets/seguros/seguro-copropiedad.jpg"
-                    title="Copropiedades"
-                    description="El seguro de copropiedades protege
-                                áreas comunes y estructuras de
-                                edificios residenciales ante riesgos
-                                como incendios, robos o daños por
-                                desastres naturales, asegurando la
-                                seguridad de los espacios compartidos."
-                />            
+                    title="Póliza Responsabilidad Civil Médica"
+                    description="Cobertura para profesionales de la salud frente a reclamos por daños a pacientes, incluyendo gastos legales."
+                />
             </section>
         </article>
     );
@@ -53,10 +40,10 @@ function Seguros () {
 
 export default Seguros;
 
-const SeguroCard = ({urlImg, title, description}) => {
-    return(
+const SeguroCard = ({ urlImg, title, description, poliza, vigencia, aseguradora }) => {
+    return (
         <div className="seguro-card">
-            <img src={urlImg} alt="img-seguro"/>
+            <ImageLoader src={urlImg} alt="img-seguro" className="img-seguro" />
             
             <div className="info">
                 <span className="tipo">
@@ -74,4 +61,4 @@ const SeguroCard = ({urlImg, title, description}) => {
             </div>
         </div>
     );
-}
+};

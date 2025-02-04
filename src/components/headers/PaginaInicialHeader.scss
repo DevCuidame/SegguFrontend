@@ -4,6 +4,7 @@
 
 .header {
     background-color: $color-secundario;
+    height: 10vh;
     width: 100%;
     position: relative;
     top: 0;
@@ -91,7 +92,6 @@
 @media (max-width: calc($breakpoint-desktop - 1px)) {
     .header {
         .logo {
-            height: 5rem;
             width: 100%;
 
             .icon-menu {

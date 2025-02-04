@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthService } from '../../services/AuthUser.service';
 import './HomeHeader.scss';
@@ -6,12 +6,38 @@ import './HomeHeader.scss';
 const HeaderHome = () => {
   const navigate = useNavigate();
   const { logout } = useAuthService(); 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const openSearch = () => {
+    const searchBar = document.querySelector('.search-bar');
+
+    // Si el tamaño de la pantalla es mayor a 1020px
+    if (screenWidth < 768) {
+      searchBar.style.transform = 'scaleY(1)';
+    }
+  };
+
+  const closeSearch = () => {
+    const searchBar = document.querySelector('.search-bar');
+
+    // Si el tamaño de la pantalla es mayor a 1020px
+    if (screenWidth < 769) {
+      searchBar.style.transform = 'scaleY(0)';
+    }
+  };
   
   const handleLogOut = async () => {
       await logout(); 
       navigate('/inicio');
   };
-  
   
   return (
     <header className="home-header">
@@ -19,7 +45,16 @@ const HeaderHome = () => {
         <img src={"./../../assets/logo.png"} alt="SEGGU"/>
       </div>
 
-      <div className="search-bar">
+      {screenWidth < 769 ? (
+        <button className='open-search' onClick={openSearch}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+      ) : null}
+
+
+      <div className="search-bar" onBlur={closeSearch}>
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-search" viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>

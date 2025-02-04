@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import DocumentPopUp from '../DocumentPopUp/DocumentPopUp';
+import ImageLoader from '../../../../components/ImageLoader/ImageLoader';
 import './Insurance.scss';
 
 
 function InsuranceCompoent ({ insurance }) {
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const [document, setDocument] = useState(false);
+    const renewal_date = new Date(insurance.renewal_date).toLocaleDateString();
 
     const handleDocumentClick = (document) => {
         setDocument(document);
@@ -24,7 +26,10 @@ function InsuranceCompoent ({ insurance }) {
     return(
         <div className="insurance-card">
             <article className='img-seguro'>
-                <img src={insurance.product === "Seguro de Vida" ? "/assets/seguros/seguro-vida.jpg" : "/assets/seguros/seguro-auto.jpg"} alt="perfil-foto" />
+                <ImageLoader
+                    src={insurance.product === "Seguro de Vida" ? "/assets/seguros/seguro-vida.jpg" : "/assets/seguros/seguro-auto.jpg"} 
+                    alt="insurance-foto"
+                ></ImageLoader>
             </article>
             
             <article className="info-container">
@@ -82,7 +87,7 @@ function InsuranceCompoent ({ insurance }) {
                             <li>{insurance.type}</li>
                             <li>{insurance.policy_number}</li>
                             <li>Fecha renovación:</li>
-                            <li>{insurance.renewal_date}</li>
+                            <li>{renewal_date}</li>
                             <li>
                                 <i>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-clock" viewBox="0 0 18 18">

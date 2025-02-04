@@ -5,20 +5,6 @@ import './Inputs.scss'; // Asume que quieres mantener un estilo similar al Input
 const InputFile = ({ name, value, onChange, span, inputClass, onFocus, onBlur }) => {
   const spanRef = React.useRef(null);
 
-  const focusSpan = () => {
-    if (spanRef.current) {
-      spanRef.current.style.top = '-25px';
-      spanRef.current.style.fontSize = '1.25rem';
-    }
-  };
-
-  const blurSpan = () => {
-    if (spanRef.current && (value || '').trim() === '') {
-      spanRef.current.style.top = '10px';
-      spanRef.current.style.fontSize = '1.5rem';
-    }
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
@@ -37,7 +23,7 @@ const InputFile = ({ name, value, onChange, span, inputClass, onFocus, onBlur })
 
   return (
     <div className={`inputDiv ${name}`}>
-      <span ref={spanRef} className="input-span">
+      <span ref={spanRef} className="input-span" style={{top: "-25px", fontSize: "1.25rem"}}>
         {span}
       </span>
       <input
@@ -45,14 +31,6 @@ const InputFile = ({ name, value, onChange, span, inputClass, onFocus, onBlur })
         accept="application/pdf"
         name={name}
         className={`input-file ${inputClass}`}
-        onFocus={() => {
-          focusSpan();
-          onFocus && onFocus();
-        }}
-        onBlur={() => {
-          blurSpan();
-          onBlur && onBlur();
-        }}
         onChange={handleFileChange}
       />
     </div>

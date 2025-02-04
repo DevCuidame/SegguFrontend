@@ -1,4 +1,5 @@
 @import '../../assets/colores.scss';
+@import '../../assets/sizeResponsive.scss';
 
 // Estilos para Inputs tipo texto
 .inputDiv{
@@ -59,5 +60,19 @@
         -moz-appearance: none;   /* Para Firefox */
         z-index: 5; 
     }
+}
 
+@media (max-width: $breakpoint-mobile) {
+    .inputDiv{
+        width: 90%;
+
+        .input-span{
+            transform: scale(0.9);
+            margin-left: 10px;
+        }
+
+        input{
+            margin-left: 10px;
+        }
+    }
 }

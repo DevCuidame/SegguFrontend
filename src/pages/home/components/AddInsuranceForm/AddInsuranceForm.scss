@@ -1,17 +1,18 @@
 @import '../../../../assets/colores.scss';
+@import '../../../../assets/sizeResponsive.scss';
 
 .add-insurance-form {
     height: 100vh;
     width: 100%;
     display: none;
     backdrop-filter: brightness(0.5);
-    position: absolute;
-    top: -50px;
-    z-index: 10;
+    position: fixed;
+    top: 0;
+    z-index: 100;
     justify-content: center;
     align-items: center;
 
-    hr{
+    hr {
         width: 80%;
         border: 1px solid black;
         margin-top: 0;
@@ -19,67 +20,109 @@
 
     .insurance-form {
         background-color: white;
-        width: 50%;
-        height: 75%;
         padding: 25px;
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .title-insurance-form{
+        .title-insurance-form {
             margin: 15px 0;
             margin-left: 10%;
             align-self: flex-start;
         }
 
-        .inputs-form{
+        .inputs-form {
             width: 100%;
             padding: 25px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-y: scroll;
+            overflow-y: auto; /* Permite el desplazamiento vertical */
+            flex-grow: 1; /* Ocupa el espacio restante */
 
-            .inputDiv{
-                margin: 15px 0;
+            .inputDiv, .imagen{
+                margin-bottom: 25px;
             }
         }
 
-        .buttons{
+        .buttons {
             width: 100%;
-            padding: 15px 0px;
+            padding: 15px 0;
             display: flex;
-            margin-left: 10px;
             justify-content: center;
+            background-color: white; /* Fondo para que los botones sean legibles */
+            position: sticky; /* Fija los botones en la parte inferior */
+            bottom: 0;
             z-index: 15;
 
-            .btn{
-                box-shadow: 5px 5px 15px 0px rgba(184,184,184,1);
+            .btn {
+                box-shadow: 5px 5px 15px 0px rgba(184, 184, 184, 1);
                 width: fit-content;
                 border-radius: 0;
                 padding: 15px 50px;
                 margin: 0 10px;
                 cursor: pointer;
 
-                &:hover{
+                &:hover {
                     transform: scale(1.1);
                 }
             }
 
-            .btn-siguiente{
+            .btn-siguiente {
                 background-color: #e5480b;
                 color: white;
             }
 
-            .btn-atras{
-                background-color:#eae9e5;
+            .btn-atras {
+                background-color: #eae9e5;
             }
         }
     }
 
-    .errors-alert{
+    .errors-alert {
         position: absolute;
         bottom: 30px;
         left: 0;
+        z-index: 15;
+    }
+}
+
+@media (min-width: $breakpoint-desktop) {
+    .add-insurance-form {
+        .insurance-form {
+            width: 50%;
+            height: 75%;
+        }
+    }
+}
+
+@media (min-width: calc($breakpoint-mobile + 1px)) and (max-width: calc($breakpoint-desktop - 1px)) {
+    .add-insurance-form {
+        .insurance-form {
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .add-insurance-form {
+        .insurance-form {
+            width: 100%;
+            max-height: 90vh; /* Limita la altura máxima en móviles */
+            height: auto;
+            position: absolute;
+            bottom: 0;
+            transition: height 1s ease;
+
+            .inputs-form {
+                max-height: calc(90vh - 150px); /* Ajusta la altura del contenido */
+            }
+
+            .buttons {
+                position: sticky; /* Fija los botones en la parte inferior */
+                bottom: 0;
+                background-color: white; /* Fondo para que los botones sean legibles */
+            }
+        }
     }
 }
